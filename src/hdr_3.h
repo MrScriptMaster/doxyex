@@ -192,7 +192,7 @@
  * > echo "Hello, World!"
  * > \endcode
  *
- * \paragraph h1_sec_sec_sec_sec_1 Параграф
+ * \paragraph h1_sec_sec_sec_sec_1 Перекрестные ссылки
  * Самый нижний уровень секционирования.
  * 
  * Очень полезная вещь, которую делает Doxygen, это перекрестные ссылки. Вы можете сосласться
@@ -236,7 +236,7 @@
  * 
  * Чтобы вставить некоторый фрагмент в документацию, его нужно пометить специальными командами прямо в исходном тексте,
  * причем можно ограничивать вставляемый фрагмент. Чтобы кусок кода можно было вставить, необходимо настроить переменную
- * EXAMPLE_PATH в конфигурационном файле Doxygen для проекта.
+ * \p EXAMPLE_PATH в конфигурационном файле Doxygen для проекта.
  * 
  * Например, вот этот фрагмент мы сюда вставили из этого исходного файла.
  * \snippet hdr_3.h Пример
@@ -251,7 +251,7 @@
  * используемым браузером. Для LaTeX формат изображений должен поддерживаться используемым компилятором LaTeX. Для HTML
  * и для LaTeX документации формат команды \p \\image немного отличается.
  * 
- * Для включения возможности вставки изображений вы должны настроить переменную IMAGE_PATH.
+ * Для включения возможности вставки изображений вы должны настроить переменную \p IMAGE_PATH.
  * \image html ruwiki.png Рисунок с оригинальным размером
  * \image html ruwiki.png Рисунок с уменьшенным размером width=80
  * 
@@ -267,23 +267,122 @@
  * \test Текст описания сценария тестирования.
  * \deprecated Текст описания устаревшей функциональности.
  * 
- * \paragraph h1_sec_sec_sec_sec_5 Вывод в несколько колонок
+ * \paragraph h1_sec_sec_sec_sec_5 Вывод списков в несколько колонок
+ * Для вывода списка в несколько колонок вы можете применить класс CSS-стиля \p multicol, который генерирует Doxygen.
+ * На его основе удобно составлять многоколоночные указатели. Класс стремится упаковать список в три колонки.
  * <hr>
  * <div>
- * <ul class="multicol">
- *     <li>Пункт 1</li>
- *     <li>Пункт 2</li>
- *     <li>Пункт 3</li>
- *     <li>Пункт 4</li>
- *     <li>Пункт 5</li>
- *     <li>Пункт 6</li>
- * </ul>
+ *   <ul class="multicol">
+ *       <li>Пункт 1</li>
+ *       <li>Пункт 2</li>
+ *       <li>Пункт 3</li>
+ *       <li>Пункт 4</li>
+ *       <li>Пункт 5</li>
+ *       <li>Пункт 6</li>
+ *   </ul>
  * </div>
  * <hr>
+ * 
+ * \section h1_sec_2 Удаленное документирование
+ * Существует подход документирования исходных кодов, при котором комментарии Doxygen пишутся в
+ * удалении от объявления программных объектов.
+ * Обычно такой подход используется для языка C, чтобы не захламлять комментариями
+ * исходный код. Другой вариант, когда код еще не дописан и часто переписывается, чтобы держать
+ * комментарии в одном месте, как черновик.
+ * 
+ * При удаленном документировании нужно выбрать в какой части файла
+ * писать комментарии Doxygen. Вы делаете также, как если бы комментировали непосредственно
+ * рядом с кодом, но указываете комментируемую часть кода прямо в комментарии.
+ * Для этого необходимо использовать команды \p \\fn, \p \\typedef, \p \\var, \p \\property, \p \\var,
+ * \p \\class, \p \\union, \p \\def, \p \\pure, \p \\relates, \p \\public, \p \\protected, \p \\private,
+ * \p \\memberof, \p \\publicsection, \p \\protectedsection, \p \\privatesection, \p \\implements.
+ * 
+ * Для примера, мы задокументируем код, который находится в самом низу этого файла.
  * 
  * @authors Симпсон, Гомер<br>
  *          Дак, Дональд
  * @copyright Текст вашего копирайта
+ */
+
+/**
+ * @class Event
+ * @brief Класс хранения события мыши.
+ * 
+ * @enum Event::EventType
+ * @brief Тип события.
+ * 
+ * @var Event::EventType Event::MOUSE_PRESS
+ * @brief Нажатие кнопки мыши
+ *
+ * @var Event::EventType Event::MOUSE_RELEASE
+ * @brief Отпускание кнопки мыши
+ *
+ * @var Event::EventType Event::KEYBOARD_PRESS
+ * @brief Нажатие кнопки на клавиатуре
+ *
+ * @var Event::EventType Event::KEYBOARD_RELEASE
+ * @brief Отпускание клавиши на клавиатуре
+ * 
+ * @class Event::MouseEvent
+ * @brief Структура для хранения координат курсора мыши.
+ * 
+ * @var Event::MouseEvent::x
+ * @brief Координата в горизонтальной плоскости экрана.
+ * 
+ * @var Event::MouseEvent::y
+ * @brief Координата в вертикальной плоскости экрана.
+ * 
+ * @class Event::KeyboardEvent
+ * @brief Событие клавиатуры.
+ * 
+ * @var Event::KeyboardEvent::scancode
+ * @brief Код клавиши.
+ * 
+ * @var Event::KeyboardEvent::virtualKey
+ * @brief Идентификатор клавиши.
+ * 
+ * @var Event::type
+ * @brief Тип события.
+ * 
+ * @def MAXI(a,b)
+ * @brief Макрос возвращает максимальное значение между \a a и \a b.
+ * 
+ * Детальное описание макроса.
+ *
+ * @var typedef unsigned int USHRT
+ * @brief Определения типа для \a unsigned short.
+ * 
+ * Детальное описание для переменной.
+ *
+ * @var int errno_1
+ * @brief Хранит последний код ошибки.
+ * 
+ * @warning Не потокобезопасна.
+ *
+ * @fn int lib_open(const char *path, int flags)
+ * @brief Открывает файловый дескриптор.
+ * 
+ * @param path Путь к файлу в файловой системе.
+ * @param flags Флаги, с которыми открывается дескриптор.
+ *
+ * @fn int lib_close(int fd)
+ * @brief Закрывает открытый ранее файловый декскриптор \a fd.
+ * @param fd Номер файлового дескриптора.
+ *
+ * @fn size_t lib_write(int fd, const char *buf, size_t count)
+ * @brief Записывает \a count байт из буфера \a buf в файл, связанный
+ * с дескриптором \a fd.
+ * @param fd Файловый дескриптор.
+ * @param buf Указатель на буфер - источник данных.
+ * @param count Размер буфера для записи.
+ * @return Количество записанных байт
+ *
+ * @fn int lib_read(int fd,char *buf,size_t count)
+ * @brief Читает данные из файла, связанного с файловым дескриптором.
+ * @param fd Файловый дескриптор.
+ * @param buf Указатель на буфер, в который данные будут записаны.
+ * @param count Сколько байт должно быть прочитано из буфера.
+ * @return Количество прочитанных байт.
  */
 
 /**
@@ -415,3 +514,38 @@ int function_for_snippet_1() {
     }
 //! \noop [Другой пример]
 }
+
+#define MAXI(a,b) (((a)>(b))?(a):(b))
+
+typedef unsigned short USHRT;
+int errno_1;
+int lib_open(const char *,int);
+int lib_close(int);
+size_t lib_write(int,const char *, size_t);
+int lib_read(int,char *,size_t);
+
+struct Event
+{
+    enum EventType {
+        MOUSE_PRESS,
+        MOUSE_RELEASE,
+        KEYBOARD_PRESS,
+        KEYBOARD_RELEASE,
+    };
+
+    struct MouseEvent {
+        unsigned x;
+        unsigned y;
+    };
+
+    struct KeyboardEvent {
+        unsigned scancode;
+        unsigned virtualKey;
+    };
+
+    EventType type;
+    union {
+        MouseEvent mouse;
+        KeyboardEvent keyboard;
+    };
+};
